@@ -1,71 +1,66 @@
-# Getting Started with Create React App
+# Framing Quotation System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Sistema de cotizaciones para enmarcado desarrollado como una Single Page Application (SPA) con React. Permite listar, crear y editar cotizaciones utilizando Firebase Firestore para persistencia de datos.
 
-## Available Scripts
+## Entorno React
 
-In the project directory, you can run:
+Este proyecto fue creado con [Create React App](https://github.com/facebook/create-react-app) utilizando **React 19.2.4**.
 
-### `npm start`
+### Tecnologías principales:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React 19** + **React Router DOM 6.30.3** para enrutamiento (rutas: `/` para listar, `/create` para crear, `/edit/:id` para editar).
+- **Bootstrap 5.3.8** para estilos responsive.
+- **SweetAlert2** para notificaciones.
+- Scripts disponibles (ejecutar en la raíz del proyecto):
+  - `npm start`: Inicia servidor de desarrollo en http://localhost:3000 (recarga automática).
+  - `npm run build`: Construye versión de producción en carpeta `build`.
+  - `npm test`: Ejecuta tests.
+  - `npm run eject`: Expone configuración (irreversible).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Dependencias clave en `package.json`: `react`, `react-dom`, `react-router-dom`, `bootstrap`, `sweetalert2-react-content`.
 
-### `npm test`
+### Estructura del proyecto:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+src/
+├── App.js          # Componente principal con rutas
+├── components/
+│   ├── create.js   # Formulario para nueva cotización
+│   ├── edit.js     # Edición de cotización existente
+│   └── show.js     # Lista de cotizaciones
+└── firebaseConfig/
+    └── firebase.js # Configuración de Firebase
+```
 
-### `npm run build`
+## Conexión con Firebase
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+El proyecto utiliza **Firebase Firestore** (v12.10.0) para almacenar y gestionar las cotizaciones.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Configuración**: Archivo `src/firebaseConfig/firebase.js` inicializa la app Firebase y exporta `db` (instancia de Firestore).
+- **Proyecto Firebase**: `framing-quotation-system` (Firestore database: 'framing-quotation-system').
+- **Uso en componentes**: Las operaciones CRUD (crear, leer, actualizar, eliminar) se realizan vía `db` en componentes `create.js`, `edit.js` y `show.js`.
+- **Credenciales**: Config hardcodeada (en producción, usa variables de entorno para seguridad).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Ejemplo de import:
 
-### `npm run eject`
+```js
+import { db } from '../firebaseConfig/firebase';
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Instalación y Ejecución
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Clona el repositorio.
+2. `npm install` (instala dependencias).
+3. `npm start` – Abre http://localhost:3000.
+4. Para producción: `npm run build` y deploy `build/` (Netlify, Vercel, Firebase Hosting).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Despliegue
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- [Documentación CRA Despliegue](https://create-react-app.dev/docs/deployment/)
+- Recomendado: Firebase Hosting (integra con proyecto existente).
 
-## Learn More
+## Troubleshooting
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- `npm run build` falla en minify: [Guía CRA](https://create-react-app.dev/docs/troubleshooting#npm-run-build-fails-to-minify).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# framing-quotation-system
+¡Listo para cotizar enmarcados!
