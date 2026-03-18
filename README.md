@@ -82,16 +82,6 @@ import { db } from '../firebaseConfig/firebase';
 | ----------------- | -------------------------------------------------------------------------------------------- |
 | Build minify fail | [CRA Guide](https://create-react-app.dev/docs/troubleshooting#npm-run-build-fails-to-minify) |
 
-<style>
-.btn {display:inline-block;padding:12px 24px;margin:8px;border-radius:8px;font-weight:bold;border:none;cursor:pointer;font-size:14px;text-decoration:none;}
-.btn-success {background:#28a745;color:white;}
-.btn-primary {background:#007bff;color:white;}
-.btn-info {background:#17a2b8;color:white;}
-.btn-warning {background:#ffc107;color:black;}
-.btn-secondary {background:#6c757d;color:white;}
-.btn-orange {background:#fd7e14;color:white;}
-.alert {padding:20px;margin:20px 0;background:#f8d7da;color:#721c24;border:1px solid #f5c6cb;border-radius:8px;font-weight:bold;}
-details summary {cursor:pointer;font-size:16px;}
-</style>
-
-¡Cotiza ya! 🎉
+<a href="#" style="display:inline-block; padding:12px 24px; border-radius:8px; font-weight:bold; background:#28a745; color:white; text-decoration:none;">
+  ¡Cotiza ya! 🎉
+</a>
