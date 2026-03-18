@@ -81,7 +81,3 @@ import { db } from '../firebaseConfig/firebase';
 | Problema          | Solución                                                                                     |
 | ----------------- | -------------------------------------------------------------------------------------------- |
 | Build minify fail | [CRA Guide](https://create-react-app.dev/docs/troubleshooting#npm-run-build-fails-to-minify) |
-
-<a href="#" style="display:inline-block; padding:12px 24px; border-radius:8px; font-weight:bold; background:#28a745; color:white; text-decoration:none;">
-  ¡Cotiza ya! 🎉
-</a>
