@@ -41,6 +41,23 @@ const Show = () => {
   };
 
   //5- Funcion de confirmación para sweet alert 2
+  const confirmDelete = (id) => {
+    MySwal.fire({
+      title: '¿Estás seguro?',
+      text: '¡No podrás revertir esto!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminarlo!',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteProduct(id);
+        MySwal.fire('Eliminado!', 'El producto ha sido eliminado.', 'success');
+      }
+    });
+  };
 
   //6- usamos useEffect para mostrar los datos al cargar el componente
   useEffect(() => {
@@ -86,7 +103,7 @@ const Show = () => {
                         <i className='fa-solid fa-pen-to-square'></i>
                       </Link>
                       <button
-                        onClick={() => deleteProduct(product.id)}
+                        onClick={() => confirmDelete(product.id)}
                         className='btn btn-sm btn-outline-danger'
                       >
                         <i className='fa-solid fa-trash'></i>
