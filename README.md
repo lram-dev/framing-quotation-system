@@ -1,83 +1,146 @@
-[![React](https://img.shields.io/badge/React-19.2.4-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/) [![Firebase](https://img.shields.io/badge/Firebase-Firestore-FFCB91?style=for-the-badge&logo=firebase)](https://firebase.google.com/) [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.8-7952B3?style=for-the-badge&logo=bootstrap)](https://getbootstrap.com/)
+[![React](https://img.shields.io/badge/React-19.2.4-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
+[![Firebase](https://img.shields.io/badge/Firebase-Firestore%20v12-FFCB91?style=for-the-badge&logo=firebase)](https://firebase.google.com/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.8-7952B3?style=for-the-badge&logo=bootstrap)]
+[![SweetAlert2](https://img.shields.io/badge/SweetAlert2-11-3085d6?style=for-the-badge&logo=sweetalert2)](https://sweetalert2.github.io/)
 
 # ⚡ Framing Quotation System
 
-**Sistema de cotizaciones para enmarcado** - SPA con React + Firestore. Listar 🔍, crear ➕, editar ✏️ cotizaciones.
+**Sistema completo de cotizaciones para enmarcado** - **CRUD FULL** con **React + Firebase Firestore**. 🔍 Listar, ➕ Crear, ✏️ Editar, 🗑️ Eliminar productos (materiales: modelo, colección, proveedor, desperdicio, costo).
 
-## 📋 Contenido
+✅ **100% funcional** - Desplegado en `localhost:3000`.
 
-- [Entorno React](#-entorno-react)
-- [Conexión Firebase](#-conexión-con-firebase)
-- [Instalación](#-instalación-y-ejecución)
-- [Despliegue](#-despliegue)
+## 🎯 Features Implementadas
 
-## 📱 Entorno React
+| Feature           | Estado | Descripción                                            |
+| ----------------- | ------ | ------------------------------------------------------ |
+| **Listar (Show)** | ✅     | Tabla dark con todos los productos. Refresh real-time. |
+| **Crear**         | ✅     | Formulario completo. `addDoc()`.                       |
+| **Editar**        | ✅     | Carga por ID `getDoc()`, `updateDoc()`.                |
+| **Eliminar**      | ✅     | SweetAlert2 confirm + `deleteDoc()`.                   |
+| **Navegación**    | ✅     | React Router: `/` (list), `/create`, `/edit/:id`.      |
+| **UI/UX**         | ✅     | Bootstrap 5 + FontAwesome icons + modals.              |
 
-[![Create React App](https://img.shields.io/badge/Create_React_App-5.0.1-09D3F0?style=flat-square&logo=create-react-app)](https://create-react-app.dev/)
+## 📱 Flujo de la App (Mermaid)
 
-**React 19.2.4** con Router DOM 6.30.3.
-
-### 🛠️ Stack Tech
-
-| Tech            | Badge                                                                                                | Versión |
-| --------------- | ---------------------------------------------------------------------------------------------------- | ------- |
-| ⚛️ React Router | ![React Router](https://img.shields.io/badge/React_Router-6.30.3-08C4B7?style=flat&logo=reactrouter) | 19.2.4  |
-| 🎨 Bootstrap    | ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.8-7952B3?style=flat&logo=bootstrap)          | 5.3.8   |
-| 🔔 SweetAlert   | ![SweetAlert](https://img.shields.io/badge/SweetAlert2-11-blue?style=flat&logo=sweetalert2)          | 11+     |
-
-**Rutas:** `/` (Show), `/create`, `/edit/:id`.
-
-<details>
-<summary>📦 Scripts (click)</summary>
-
-<p><a href="#" class="btn btn-success" onclick="alert('npm start ejecutado! Abre localhost:3000')">🚀 npm start</a> <a href="http://localhost:3000" class="btn btn-primary">🌐 Abrir App</a></p>
-
-<p><a href="#" class="btn btn-info">📦 npm run build</a> <a href="#" class="btn btn-warning">🧪 npm test</a></p>
-
-<div class="alert alert-danger">⚠️ npm run eject - **Irreversible**</div>
-
-</details>
-
-### 📁 Estructura
-
-```
-src/
-├── App.js (Rutas)
-├── components/
-│   ├── create.js ➕
-│   ├── edit.js ✏️
-│   └── show.js 🔍
-└── firebaseConfig/firebase.js 🔥
+```mermaid
+graph TD
+    A[🏠 Home / Listar] -->|➕ Crear| B[📝 Form Crear]
+    A -->|✏️ Editar| C[📝 Form Editar]
+    A -->|🗑️ Eliminar| D{SweetAlert Confirm}
+    D -->|Sí| E[🗑️ deleteDoc]
+    B -->|Guardar| F[✅ addDoc → Listar]
+    C -->|Actualizar| G[✅ updateDoc → Listar]
+    E -->|Listar| A
+    F --> A
+    G --> A
 ```
 
-## 🔥 Conexión con Firebase
+## 📁 Estructura del Proyecto
 
-[![Firestore](https://img.shields.io/badge/Firestore-v12.10-FFCB91?style=flat-square&logo=firebase)](https://firebase.google.com/products/firestore)
+```
+framing-quotation-system/
+├── public/                 # Assets estáticos
+├── src/
+│   ├── App.js             # Rutas Router DOM
+│   ├── components/
+│   │   ├── create.js      # ➕ Form addDoc
+│   │   ├── edit.js        # ✏️ Form updateDoc
+│   │   └── show.js        # 🔍 Tabla + deleteDoc
+│   └── firebaseConfig/
+│       └── firebase.js    # 🔥 Config Firestore
+├── package.json           # React 19.2 + deps
+├── README.md              # 👈 Tú estás aquí
+└── TODO.md                # Progreso actual
+```
 
-**Firestore v12** en proyecto `framing-quotation-system`.
+## 🔥 Firebase Config & Schema
 
-- Config: `src/firebaseConfig/firebase.js` → export `db`
-- CRUD en components via `db`
-- **Prod:** Env vars para config
+**Proyecto**: `framing-quotation-system` (Firestore).
 
-**Ejemplo:**
+**Collection**: `products`
+
+```js
+{
+  modelo: string,      // 'Modelo A'
+  coleccion: string,   // 'Verano 2024'
+  proveedor: string,   // 'ProveedorX'
+  desperdicio: number, // 0.15
+  costo: number        // 25.50
+}
+```
+
+**Ejemplo conexión** (todos los components):
 
 ```js
 import { db } from '../firebaseConfig/firebase';
+const productsCollection = collection(db, 'products');
 ```
 
-## 🚀 Instalación y Ejecución
+## 🚀 Instalación & Demo
 
-1. `git clone <repo>`
-2. `npm install`
-3. `npm start` → http://localhost:3000
+<details>
+<summary>📦 Scripts ejecutables (click para copiar)</summary>
 
-## 🌐 Despliegue 🚀
+```bash
+# 1. Instalar dependencias
+npm install
 
-<p><a href="https://create-react-app.dev/docs/deployment/" class="btn btn-secondary">📚 CRA Deploy</a> <a href="https://firebase.google.com/docs/hosting" class="btn btn-orange">🔥 Firebase Host</a> <a href="#" class="btn btn-success">🚀 Vercel/Netlify</a></p>
+# 2. Iniciar servidor dev
+npm start
+```
 
-## 🔧 Troubleshooting
+**Abre**: http://localhost:3000
 
-| Problema          | Solución                                                                                     |
-| ----------------- | -------------------------------------------------------------------------------------------- |
-| Build minify fail | [CRA Guide](https://create-react-app.dev/docs/troubleshooting#npm-run-build-fails-to-minify) |
+<button onclick="navigator.clipboard.writeText('npm start'); alert('¡Comando copiado! 🚀');">📋 Copiar npm start</button>
+
+</details>
+
+### Demo Rutas
+
+| Ruta           | Acción    | Screenshot                                                                               |
+| -------------- | --------- | ---------------------------------------------------------------------------------------- |
+| `/`            | Listar 🔍 | ![Show Table](https://via.placeholder.com/800x400/dark/00ff00?text=Tabla+Productos+Dark) |
+| `/create`      | Crear ➕  | ![Create Form](https://via.placeholder.com/800x400/blue/ffffff?text=Form+Crear)          |
+| `/edit/abc123` | Editar ✏️ | ![Edit Form](https://via.placeholder.com/800x400/orange/ffffff?text=Form+Editar)         |
+
+## 🛠️ Stack Técnico Completo
+
+| Categoría    | Tech                   | Versión/Badge                                                      |
+| ------------ | ---------------------- | ------------------------------------------------------------------ |
+| **Frontend** | React                  | ![React](https://img.shields.io/badge/React-19.2.4-61DAFB)         |
+| **Router**   | React Router DOM       | v6.30+                                                             |
+| **Backend**  | Firebase Firestore     | v12                                                                |
+| **UI**       | Bootstrap 5 + FA Icons | ![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3)      |
+| **UX**       | SweetAlert2            | ![SweetAlert2](https://img.shields.io/badge/SweetAlert2-11-3085d6) |
+
+## 📊 Ejemplo de Uso
+
+1. **Listar**: Navega a `/` → Tabla con botones Editar/Eliminar.
+2. **Crear**: `/create` → Llena form → Guarda → Redirige a lista.
+3. **Eliminar**: Click 🗑️ → Modal confirm → Elimina + refresh.
+
+**Firestore Rules** (recomendado para prod):
+
+```js
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /products/{document} {
+      allow read, write: if true;  // Cambiar a auth
+    }
+  }
+}
+```
+
+## 🔮 Próximos Pasos (ver TODO.md)
+
+- Agregar búsqueda/paginación.
+- Autenticación Firebase Auth.
+- Cálculo cotizaciones automáticas.
+- Deploy Firebase Hosting.
+
+## 📞 Soporte
+
+¡App **FULLY OPERATIONAL**! Reporta issues en GitHub.
+
+⭐ **¡Gracias por usar Framing Quotation System!** 🚀
