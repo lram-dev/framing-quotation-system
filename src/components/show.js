@@ -28,9 +28,7 @@ const Show = () => {
   //3- Función para mostrar los datos
   const getProducts = async () => {
     const data = await getDocs(productsCollection);
-    //console.log(data);
     setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    //console.log(products);
   };
 
   //4- Función para eliminar los datos
